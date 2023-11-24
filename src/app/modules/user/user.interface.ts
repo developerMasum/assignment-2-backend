@@ -1,24 +1,10 @@
+import { Model } from 'mongoose';
+// import { UserModel } from './user.model';
 // import { Schema, model, connect } from 'mongoose';
 
-// export type Address = {
-//   street: string;
-//   city: string;
-//   country: string;
-// };
 
-// export type UserName = {
-//   firstName: string;
-//   lastName: string;
-// };
-
-export type Orders = {
-  productName: string;
-  price: number;
-  quantity: number;
-};
-
-export type User = {
-  userId: number;
+export type TUser = {
+  userId: string;
   username: string;
   password: string;
   fullName: {
@@ -34,5 +20,24 @@ export type User = {
     country: string;
   };
   email: string;
-  orders: Orders;
+  orders?: [
+    {
+      productName: string;
+      price: number;
+      quantity: number;
+    },
+  ];
+  isDeleted: boolean;
 };
+
+// export type UserMethods = {
+//   isUserExists(id: string): Promise<TUser | null>;
+// };
+// export type UserModel = Model<TUser, Record<string, never>, UserMethods>;
+
+export type userMethods = {
+  // eslint-disable-next-line no-unused-vars
+  isUserExists(userId: string): Promise<TUser | null>;
+};
+
+export type customModel = Model<TUser, Record<string, never>, userMethods>;
