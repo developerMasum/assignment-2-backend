@@ -101,8 +101,12 @@ const getTotalPriceOfOrdersFromDB = async (userId: string) => {
     { $unwind: '$orders' },
     {
       $group: {
-        _id: '$_id',
-        totalPrice: { $sum: '$orders.price' },
+        _id: null,
+        totalPrice: {
+          $sum: {
+            $multiply: ['$orders.price', '$orders.quantity'],
+          },
+        },
       },
     },
     { $project: { _id: 0 } },
