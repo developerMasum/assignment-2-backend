@@ -30,11 +30,6 @@ export type TUser = {
   isDeleted: boolean;
 };
 
-// export type UserMethods = {
-//   isUserExists(id: string): Promise<TUser | null>;
-// };
-// export type UserModel = Model<TUser, Record<string, never>, UserMethods>;
-
 export type userMethods = {
   // eslint-disable-next-line no-unused-vars
   isUserExists(userId: string): Promise<TUser | null>;

@@ -82,6 +82,13 @@ userSchema.pre('findOne', function (next) {
 //   return existingUser;
 // };
 
+// for hide
+userSchema.methods.toJSON = function () {
+  const userObject = this.toObject();
+  delete userObject.password;
+  delete userObject.orders;
+  return userObject;
+};
 userSchema.methods.isUserExists = async function (userId: string) {
   const existingUser = await User.findOne({ userId });
   return existingUser;
@@ -89,10 +96,4 @@ userSchema.methods.isUserExists = async function (userId: string) {
 
 export const User = model<TUser, customModel>('User', userSchema);
 
-// for hide
-// userSchema.methods.toJSON = function () {
-//   const userObject = this.toObject();
-//   delete userObject.password;
-//   delete userObject.orders;
-//   return userObject;
-// };
+
