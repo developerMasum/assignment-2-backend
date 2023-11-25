@@ -21,7 +21,7 @@ import config from '../../config';
 // });
 
 const userSchema = new Schema<TUser, customModel, userMethods>({
-  userId: { type: String, required: true, unique: true },
+  userId: { type: Number, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   fullName: {
@@ -89,7 +89,7 @@ userSchema.methods.toJSON = function () {
   delete userObject.orders;
   return userObject;
 };
-userSchema.methods.isUserExists = async function (userId: string) {
+userSchema.methods.isUserExists = async function (userId: number) {
   const existingUser = await User.findOne({ userId });
   return existingUser;
 };

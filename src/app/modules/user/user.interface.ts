@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 
 export type TUser = {
-  userId: string;
+  userId: number;
   username: string;
   password: string;
   fullName: {
@@ -32,7 +32,7 @@ export type TUser = {
 
 export type userMethods = {
   // eslint-disable-next-line no-unused-vars
-  isUserExists(userId: string): Promise<TUser | null>;
+  isUserExists(userId: number): Promise<TUser | null>;
 };
 
-export type customModel = Model<TUser, Record<string, never>, userMethods>;
+export type customModel = Model<TUser, Record<number, never>, userMethods>;

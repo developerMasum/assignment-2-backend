@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/api/users',userRoutes)
 
 const getAController = (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('welcome to user management server !');
 }
 
 app.get('/',getAController );

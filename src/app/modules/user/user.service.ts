@@ -2,7 +2,6 @@ import { TUser } from './user.interface';
 import { User } from './user.model';
 
 const createUserInDB = async (userData: TUser) => {
-  // const result =   await User.create(user)
 
   const user = new User(userData);
   if (await user.isUserExists(userData.userId)) {
@@ -17,14 +16,14 @@ const getAllUserFromDB = async () => {
   const result = await User.find();
   return result;
 };
-const getSingleUserFromDB = async (userId: string) => {
+const getSingleUserFromDB = async (userId: number) => {
   const result = await User.findOne({ userId });
   // console.log(result);
   return result;
 };
 
 // delete
-const deleteUserFromDB = async (userId: string) => {
+const deleteUserFromDB = async (userId: number) => {
   const result = await User.updateOne({ userId }, { isDeleted: true });
   // console.log(result);
   return result;
@@ -32,14 +31,8 @@ const deleteUserFromDB = async (userId: string) => {
 
 // update--
 
-const updateSingleUserFromDB = async (userId: string, userData: TUser) => {
-  // const user = new User();
-  // console.log(userId);
-
-  // if (!(await user.isUserExists(userId))) {
-  //   throw new Error('User not found');
-  // }
-
+const updateSingleUserFromDB = async (userId: number, userData: TUser) => {
+ 
   const result = await User.updateOne({ userId: userId }, userData, {
     new: true,
     runValidators: true,
@@ -51,10 +44,10 @@ const updateSingleUserFromDB = async (userId: string, userData: TUser) => {
   }
 };
 
-// order ar kaj 
-const createOrderToDB = async (userId: string, orderData: TUser) => {
+// order ar kaj
+const createOrderToDB = async (userId: number, orderData: TUser) => {
   const user = new User();
-  console.log(userId);
+  // console.log(userId);
 
   if (!(await user.isUserExists(userId))) {
     throw new Error('User not found');
@@ -73,7 +66,7 @@ const createOrderToDB = async (userId: string, orderData: TUser) => {
   return result;
 };
 
-const getAllOrderByUserFromDB = async (userId: string) => {
+const getAllOrderByUserFromDB = async (userId: number) => {
   const user = new User();
   // console.log(userId);
 
@@ -89,7 +82,7 @@ const getAllOrderByUserFromDB = async (userId: string) => {
   return result;
 };
 
-const getTotalPriceOfOrdersFromDB = async (userId: string) => {
+const getTotalPriceOfOrdersFromDB = async (userId: number) => {
   const user = new User();
   // console.log(userId);
 
@@ -122,5 +115,5 @@ export const UserServices = {
   updateSingleUserFromDB,
   getAllOrderByUserFromDB,
   getTotalPriceOfOrdersFromDB,
-  createOrderToDB
+  createOrderToDB,
 };

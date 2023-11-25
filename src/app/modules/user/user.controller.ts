@@ -47,7 +47,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 const getSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
     const result = await UserServices.getSingleUserFromDB(userId);
 
     res.status(200).json({
@@ -67,7 +67,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 // delete
 const deleteSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
     const result = await UserServices.deleteUserFromDB(userId);
 
     res.status(200).json({
@@ -88,7 +88,7 @@ const deleteSingleUser = async (req: Request, res: Response) => {
 // put a data 
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
     const userData = req.body;
     const password = userData.password;
 
@@ -128,7 +128,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
     const orderData = req.body;
 
     // console.log(userId, orderData);
@@ -152,11 +152,11 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
     const result = await UserServices.getAllOrderByUserFromDB(userId);
     res.status(200).json({
       success: true,
-      message: 'Order faced successfully',
+      message: 'Order fetched successfully',
       data: result,
     });
   } catch (error: any) {
@@ -173,7 +173,7 @@ const getAllOrders = async (req: Request, res: Response) => {
 
 const getTotalPriceOfOrders = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const  userId  = parseInt(req.params.userId);
 
     const result = await UserServices.getTotalPriceOfOrdersFromDB(userId);
     res.status(200).json({
